@@ -62,6 +62,41 @@ return redirect()
         
     }
 
+       public function gettoken(Request $request)
+    {
+        //
+      $number = 1;
+       $id = $request->id;
+     //  $data = array('status'=>$number,'pickup_token'=>000000);
+ 
+       foreach (user_childs::where('reg_id',$id)->get() as $user) {
+ $number =  mt_rand(13, rand(100, 99999990)); // better than rand()
+
+    // call the same function if the barcode exists already
+    $barcodeNumberExists=user_childs::where('pickup_token',$number)->exists();
+
+    if ($barcodeNumberExists > 0) {
+        return gettoken();
+    }else{
+
+$data = array( 'email' => $user->email, 'class' => $user->class, 'fname' => $user->full_name, 'first_name' => config('app.name'), 'from' => 'noreply@cretch-school.com', 'from_name' => 'Cretch-School','mee' => $number);
+
+Mail::send( 'mails.member_token', $data, function($message) use ($data)
+{
+    $message->to( $data['email'] )->from( $data['from'], $data['first_name'] )->subject( 'Welcome!' );
+
+});
+
+
+    $user->pickup_token = $number;
+    $user->save();
+}
+       }
+// return redirect()->back()->with('status', "Token Generated For All .....");
+        //return view('branch.all');
+         return response()->json(['success' => true,]);
+    }
+
 
     function generatetokeNumber() {
      // foreach(user_childs::all() as $user) {
@@ -256,6 +291,17 @@ public function save_add_console(Request $request)
                                                  'gender' =>$gender,
                                                  'occupation' => $Occupation
                                            ));
+
+                                           $data = array( 'email' => $email,  'password' => $password, 'username' => $fullname.$user_id, 'first_name' => config('app.name'), 'from' => 'noreply@cretch-school.com', 'from_name' => 'Cretch-School','mee' => $user_id);
+
+Mail::send( 'mails.member_welcome_message', $data, function($message) use ($data)
+{
+    $message->to( $data['email'] )->from( $data['from'],  $data['first_name'] )->subject( 'Welcome!' );
+
+});
+
+
+
                                          }
     #code
    //         foreach ($request->fullname as $fullname)

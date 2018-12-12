@@ -53,11 +53,15 @@ public function show_parent()
     public function show_child()
     {
          $members = user_profiles::all();
-         return view('ControlRoom.Add_Child',compact('members',$members)); 
+         return view('ControlRoom.Add_Child',compact('members',$members));
+    }
+    public function show_history()
+    {
+         return view('ControlRoom.history'); 
     }
 public function show_mail()
 {
      $members = user_profiles::all();
-         return view('ControlRoom.Add_mail',compact('members',$members)); 
+         return view('ControlRoom.Add_mail',compact('members',$members));
 }
 }

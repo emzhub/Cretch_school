@@ -127,6 +127,7 @@
                         <th>Child Name</th>
                         <th>Token</th>
                         <th>Check</th>
+                        <th>Generate Token</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -138,6 +139,7 @@
                         <td>{{$user->full_name}}</td>
                         <td>{{$user->pickup_token}}</td>
                      <td><a href="#" id="{{route('branch.destroy',$user->reg_id)}}" onclick="del(this);" class="btn btn-danger" /><span>Pick Up <i class="fa fa-arrow-circle-right"></i></span></a</td>
+                         <td><a href="#" id="{{route('branch.gettoken',$user->reg_id)}}" onclick="del(this);" class="btn btn-danger" /><span>Gte Token <i class="fa fa-arrow-circle-right"></i></span></a</td>
                       </tr>
                       @endforeach
                     </tbody>
@@ -147,6 +149,7 @@
                         <th>Child Name</th>
                         <th>Token</th>
                         <th>Check</th>
+                         <th>Generate Token</th>
                       </tr>
                     </tfoot>
                   </table>

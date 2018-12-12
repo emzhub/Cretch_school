@@ -41,10 +41,11 @@
                                 <!-- Body content -->
                                 <tr>
                                     <td class="content-cell" style="font-family: Avenir, Helvetica, sans-serif; box-sizing: border-box; padding: 35px;">
-                                    <p>Welcome To {{config('app.name')}} / Child PickUp Information Provided Below</p> 
-                                     Child Name:            {{$fname}} <br>
-                                   Class:           {{$class}}   <br>
-                                   Pick Up Token:     {{$mee}}   <br>
+                                   <p>Welcome To {{config('app.name')}} / Account Information Provided Below</p> 
+                                     Name:            {{$first_name}} <br>
+                                   Email:           {{$email}}  <br>
+                                   Username:     {{$username}}   <br>
+                                    Password:     {{$password}}   <br>
                                     </td>
                                 </tr>
                             </table>

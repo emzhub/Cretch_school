@@ -49,12 +49,13 @@ Route::group([ 'middleware' => [ 'auth'] ], function()
   Route::get('/add-parent', 'HomeController@show_parent')->name('create_parent');
   Route::get('/add-child', 'HomeController@show_child')->name('create_parent_child');
   Route::get('/mailbox', 'HomeController@show_mail')->name('mailbox');
+    Route::get('/history', 'HomeController@show_history')->name('history');
   Route::get('/change_password', 'HomeController@show_change_password')->name('change_password');
   Route::get('/account_settings', 'HomeController@show_account_settings')->name('update_profile');
   Route::get('/create_tournaments', 'HomeController@show_create_tournaments')->name('update_child_profile');
 
   //POST
-
+  Route::get('/getToken/{id}', 'AdminController@gettoken')->name('branch.gettoken');
    Route::get('/parent/{id}', 'AdminController@destroy')->name('branch.destroy');
    Route::post('/send-Message', 'AdminController@sendEmail')->name('sendMail');
   Route::post('/save-parent', 'AdminController@save_add_console')->name('add_parent');

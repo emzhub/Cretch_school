@@ -319,6 +319,11 @@
                <small class="label pull-right bg-yellow">12</small>
              </a>
            </li>
+           <li>
+            <a href="{{route('history') }}">
+              <i class="fa fa-envelope"></i> <span>History</span>
+            </a>
+          </li>
    @elseif(Auth::user()->isGuest())
               <li class="treeview">
               <a href="#">
