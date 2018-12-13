@@ -177,7 +177,8 @@ $idg=mt_rand(13, rand(100, 99999990)); // better than rand()
         historys::create(array(
                     'history_id' => $id,
                     'parent_name' => $sd->name,
-                      'child_name' => $ch->full_name
+                      'child_name' => $ch->full_name,
+                      'deleted_at'  => now()
                             ));
                             // Update
                              //  user_childs::updateData($id, $data);

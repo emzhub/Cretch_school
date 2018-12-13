@@ -18,6 +18,7 @@
                 <table id="example1" class="table table-bordered table-striped">
                   <thead>
                     <tr>
+                      <th>S/N</th>
                       <th>Parent Name</th>
                       <th>Child Name</th>
                       <th>Check Out Time</th>
@@ -25,17 +26,20 @@
                   </thead>
                   <tbody>
      @foreach ($members as $user)
-   <?php // var_dump($user->user->name); ?>
+   <?php  ?>
+
                       <tr>
+                            <td>{{$user->id}}</td>
                         <td>{{$user->parent_name}}</td>
                         <td>{{$user->child_name}}</td>
-                        <td>{{$user->created_at}}</td>
+                        <td>{{Carbon\Carbon::createFromFormat('Y-m-d H:i:s', $user->deleted_at)->toDayDateTimeString()}}</td>
                      </tr>
                       @endforeach
 
                   </tbody>
                   <tfoot>
                     <tr>
+                      <th>S/N</th>
                      <th>Parent Name</th>
                       <th>Child Name</th>
                     <th>Check Out Time</th>

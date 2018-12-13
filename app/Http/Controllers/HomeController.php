@@ -67,7 +67,7 @@ public function show_parent()
     }
     public function show_history()
     {
-         $members = historys::all();
+         $members = historys::orderBy('id')->get();
          return view('ControlRoom.history',compact('members',$members));
     }
 public function show_mail()
