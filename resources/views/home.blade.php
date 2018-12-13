@@ -15,7 +15,7 @@
    <!-- Start your project here-->
       <div class="container well">
   <!-- Main content -->
-    
+
           <!-- Small boxes (Stat box) -->
           <div class="row">
             <div class="col-lg-3 col-xs-6">
@@ -70,7 +70,7 @@
                 <a href="#" class="small-box-footer">More info <i class="fa fa-arrow-circle-right"></i></a>
               </div>
             </div><!-- ./col -->
-         
+
           </div><!-- /.row -->
           <!-- Main row -->
 
@@ -112,7 +112,7 @@
                                     </div>
   <div class="row">
             <div class="col-xs-12">
-     
+
 
               <div class="box">
                 <div class="box-header">
@@ -160,7 +160,7 @@
 
 </div>
 
-  
+
 
 
 
@@ -168,7 +168,7 @@
 
        @elseif(Auth::user()->isGuest())
 
-       
+
 
                @else
                    I don't have any records!
@@ -185,7 +185,7 @@
 
 <script>
     function del(d){
-        var confirmed = confirm('confirm to delete');
+        var confirmed = confirm('Plsease Confirm This Operation');
         console.log(confirmed);
         console.log(d);
         if(confirmed){
