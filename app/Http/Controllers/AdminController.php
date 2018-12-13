@@ -176,11 +176,14 @@ $idg=mt_rand(13, rand(100, 99999990)); // better than rand()
   // dd($ch);
         $pid=$ch->parent_id;
       $sd= User::where('user_id',$pid)->first();
+      if($id!=0){
         historys::create(array(
                     'history_id' => $id,
                     'parent_name' => $sd->name,
                       'child_name' => $ch->full_name
                             ));
+      }
+
            }
         // Update
          //  user_childs::updateData($id, $data);
