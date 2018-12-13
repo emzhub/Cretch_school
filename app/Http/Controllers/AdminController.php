@@ -182,12 +182,13 @@ $idg=mt_rand(13, rand(100, 99999990)); // better than rand()
                     'parent_name' => $sd->name,
                       'child_name' => $ch->full_name
                             ));
+                            // Update
+                             //  user_childs::updateData($id, $data);
+                           DB::table('user_childs')->where('reg_id', $id)->update($data);
       }
 
            }
-        // Update
-         //  user_childs::updateData($id, $data);
-       DB::table('user_childs')->where('reg_id', $id)->update($data);
+
 
         //DB::delete('delete * from')
 
