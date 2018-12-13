@@ -173,7 +173,7 @@ $idg=mt_rand(13, rand(100, 99999990)); // better than rand()
   // dd($ch);
         $pid=$ch->parent_id;
       $sd= User::where('user_id',$pid)->first();
-      if($CH->pickup_token!=0){
+      if($ch->pickup_token!=0){
         historys::create(array(
                     'history_id' => $id,
                     'parent_name' => $sd->name,
