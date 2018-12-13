@@ -68,7 +68,7 @@
                       </div>
 
                         <div class="form-group has-feedback">
-                        <input type="text"  placeholder="Date Of Birth" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask class="form-control{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob') }}"  autofocus>
+                        <input type="date"  placeholder="Date Of Birth" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask class="form-control{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob') }}"  autofocus>
                           @if ($errors->has('dob'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('dob') }}</strong>
