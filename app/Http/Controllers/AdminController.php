@@ -164,9 +164,6 @@ public function generatePICKUP(Request $request){
        $id = $request->id;
       // dd($id);
        $data = array('status'=>$number,'pickup_token'=>000000);
-
-
-
 $idg=mt_rand(13, rand(100, 99999990)); // better than rand()
     $barcodeNumberExists = historys::where('history_id', $idg)->exists();
           if ($barcodeNumberExists > 0) {
@@ -176,7 +173,7 @@ $idg=mt_rand(13, rand(100, 99999990)); // better than rand()
   // dd($ch);
         $pid=$ch->parent_id;
       $sd= User::where('user_id',$pid)->first();
-      if($id!=0){
+      if($CH->pickup_token!=0){
         historys::create(array(
                     'history_id' => $id,
                     'parent_name' => $sd->name,
