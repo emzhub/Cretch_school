@@ -5,7 +5,10 @@
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
      <!-- Select2 -->
     <script src="{{URL::asset('plugins/select2/select2.full.min.js')}}"></script>
-   
+    <!-- InputMask -->
+       <script src="{{URL::asset('plugins/input-mask/jquery.inputmask.js')}}"></script>
+       <script src="{{URL::asset('plugins/input-mask/jquery.inputmask.date.extensions.js')}}"></script>
+       <script src="{{URL::asset('plugins/input-mask/jquery.inputmask.extensions.js')}}"></script>
     <!-- Bootstrap 3.3.5 -->
     <script src="{{URL::asset('bootstrap/js/bootstrap.min.js')}}"></script>
     <!-- DataTables -->
@@ -17,7 +20,7 @@
     <script src="{{URL::asset('plugins/fastclick/fastclick.min.js')}}"></script>
     <!-- AdminLTE App -->
     <script src="{{URL::asset('dist/js/app.min.js')}}"></script>
-  
+
     <!-- AdminLTE for demo purposes -->
     <script src="{{URL::asset('dist/js/demo.js')}}"></script>
       <!-- Bootstrap WYSIHTML5 -->
@@ -40,10 +43,11 @@
          //Add text editor
         $("#compose-textarea").wysihtml5();
 
+        //Datemask dd/mm/yyyy
+               $("#datemask").inputmask("dd/mm/yyyy", {"placeholder": "dd/mm/yyyy"});
 
 
 
-        
       });
     </script>
 

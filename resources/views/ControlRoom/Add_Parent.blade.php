@@ -6,7 +6,7 @@
 <!-- Start your project here-->
      <div class="container">
   <div class="row">
-        
+
               <div class="col-lg-9 col-xs-12">
                   <div class="register-box-body">
                      <h1> <p class="login-box-msg"><b>Register Parent</b></p></h1>
@@ -51,7 +51,7 @@
                                                 </span>
                                             @endif
                       </div>
-            
+
                       <div class="form-group has-feedback">
                         <input type="tel"  placeholder="Phone Number "class="form-control{{ $errors->has('phone') ? ' is-invalid' : '' }}" name="phone" value="{{ old('phone') }}"  autofocus>
                           @if ($errors->has('phone'))
@@ -60,7 +60,7 @@
                                                 </span>
                                             @endif
                       </div>
-                      
+
                       <div class="form-group has-feedback">
                         <input type="occupation"  placeholder="Occupation" class="form-control{{ $errors->has('Occupation') ? ' is-invalid' : '' }}" name="Occupation" value="{{ old('Occupation') }}"  autofocus>
                           @if ($errors->has('Occupation'))
@@ -69,7 +69,7 @@
                                                 </span>
                                             @endif
                     </div>
-                      
+
                       <div class="form-group has-feedback">
                         <input type="email"  placeholder="Email"class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}"  autofocus>
                           @if ($errors->has('email'))
@@ -78,32 +78,46 @@
                                                 </span>
                                             @endif
                       </div>
-                      
-                      <div class="form-group has-feedback">
-                        <input type="gender"  placeholder="Gender" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" value="{{ old('gender') }}"  autofocus>
-                          @if ($errors->has('gender'))
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $errors->first('gender') }}</strong>
-                                                </span>
-                                            @endif
-                      </div>
-            
-                       
+
+                      <div class="box-body">
+              <div class="row">
+        
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Sex</label>
+                    <select class="form-control select" name="gender" style="width: 100%;">
+                      <option selected="selected">Select Gender</option>
+                      <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    @if ($errors->has('gender'))
+                                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $errors->first('gender') }}</strong>
+                                          </span>
+                                      @endif
+                  </div><!-- /.form-group -->
+
+                </div><!-- /.col -->
+
+              </div><!-- /.row -->
+            </div><!-- /.box-body -->
+
+
                             <div class="input-group-btn">
                                <!--      <button class="btn btn-success" type="button"  onclick="cat_fields();"> <span class="icon-plus-sign" aria-hidden="true"></span>Add More  </button> -->
-                                     <button type="submit" class="btn btn-primary btn-block btn-flat pull-right">Register</button> 
+                                     <button type="submit" class="btn btn-primary btn-block btn-flat pull-right">Register</button>
                                     </div>
                                    <!--  <div class="form-group row mb-0 pull-right">
                                         <div class="col-md-6 offset-md-4">
-                                             
+
                                         </div>
                                     </div> -->
                                 </form>
-          </div>  
-            </div>  
           </div>
-       
-               
+            </div>
+          </div>
+
+
             </div>
 
 
@@ -131,4 +145,3 @@ function remove_cat_fields(rid) {
 </script>
 
 @endsection
-

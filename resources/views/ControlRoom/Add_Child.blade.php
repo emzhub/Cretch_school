@@ -6,7 +6,7 @@
 <!-- Start your project here-->
      <div class="container">
   <div class="row">
-        
+
               <div class="col-lg-9 col-xs-12">
                   <div class="register-box-body">
                      <h1> <p class="login-box-msg"><b>Register Child</b></p></h1>
@@ -35,7 +35,7 @@
                                    </div>
 
 
-        
+
 
 
 
@@ -44,7 +44,7 @@
               <div class="row">
                 <div class="col-md-6">
                   <div class="form-group">
-                    <label>Minimal</label>
+                    <label>Parents</label>
                     <select class="form-control select2" name="Parent_id" style="width: 100%;">
                       <option selected="selected">Select Parent</option>
                       @foreach ($members as $member)
@@ -52,9 +52,9 @@
                                           @endforeach
                     </select>
                   </div><!-- /.form-group -->
-               
+
                 </div><!-- /.col -->
-             
+
               </div><!-- /.row -->
             </div><!-- /.box-body -->
                                               <div class="form-group has-feedback">
@@ -68,49 +68,89 @@
                       </div>
 
                         <div class="form-group has-feedback">
-                        <input type="text"  placeholder="Date Of Birth" class="form-control{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob') }}"  autofocus>
+                        <input type="text"  placeholder="Date Of Birth" data-inputmask="'alias': 'mm/dd/yyyy'" data-mask class="form-control{{ $errors->has('dob') ? ' is-invalid' : '' }}" name="dob" value="{{ old('dob') }}"  autofocus>
                           @if ($errors->has('dob'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('dob') }}</strong>
                                                 </span>
                                             @endif
                       </div>
-            
-                                       
-                      <div class="form-group has-feedback">
+
+
+                      <!-- <div class="form-group has-feedback">
                         <input type="class"  placeholder="Class"class="form-control{{ $errors->has('class') ? ' is-invalid' : '' }}" name="class" value="{{ old('class') }}"  autofocus>
                           @if ($errors->has('class'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('class') }}</strong>
                                                 </span>
                                             @endif
-                      </div>
-                      
-                      <div class="form-group has-feedback">
+                      </div> -->
+
+                      <div class="box-body">
+              <div class="row">
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Class</label>
+                    <select class="form-control select" name="class" style="width: 100%;">
+                      <option selected="selected">Select Class</option>
+                      <option value="0-2">0-2</option>
+                        <option value="3-5">3-5</option>
+                        <option value="6-8">6-8</option>
+                          <option value="9-12">9-12</option>
+                              <option value="Maidens(househelps)">Maidens(househelps)</option>
+                    </select>
+                    @if ($errors->has('class'))
+                                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $errors->first('class') }}</strong>
+                                          </span>
+                                      @endif
+                  </div><!-- /.form-group -->
+
+                </div><!-- /.col -->
+                <div class="col-md-6">
+                  <div class="form-group">
+                    <label>Sex</label>
+                    <select class="form-control select" name="gender" style="width: 100%;">
+                      <option selected="selected">Select Gender</option>
+                      <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                    </select>
+                    @if ($errors->has('gender'))
+                                          <span class="invalid-feedback" role="alert">
+                                              <strong>{{ $errors->first('gender') }}</strong>
+                                          </span>
+                                      @endif
+                  </div><!-- /.form-group -->
+
+                </div><!-- /.col -->
+
+              </div><!-- /.row -->
+            </div><!-- /.box-body -->
+                      <!-- <div class="form-group has-feedback">
                         <input type="gender"  placeholder="Gender" class="form-control{{ $errors->has('gender') ? ' is-invalid' : '' }}" name="gender" value="{{ old('gender') }}"  autofocus>
                           @if ($errors->has('gender'))
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $errors->first('gender') }}</strong>
                                                 </span>
                                             @endif
-                      </div>
-            
-                       
+                      </div> -->
+
+
                             <div class="input-group-btn">
                                <!--      <button class="btn btn-success" type="button"  onclick="cat_fields();"> <span class="icon-plus-sign" aria-hidden="true"></span>Add More  </button> -->
-                                     <button type="submit" class="btn btn-primary btn-block btn-flat pull-right">Register</button> 
+                                     <button type="submit" class="btn btn-primary btn-block btn-flat pull-right">Register</button>
                                     </div>
                                    <!--  <div class="form-group row mb-0 pull-right">
                                         <div class="col-md-6 offset-md-4">
-                                             
+
                                         </div>
                                     </div> -->
                                 </form>
-          </div>  
-            </div>  
           </div>
-       
-               
+            </div>
+          </div>
+
+
             </div>
 
 
@@ -138,4 +178,3 @@ function remove_cat_fields(rid) {
 </script>
 
 @endsection
-
