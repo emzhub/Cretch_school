@@ -20,20 +20,25 @@
                     <tr>
                       <th>Parent Name</th>
                       <th>Child Name</th>
-                      <th>Token</th>
-                      <th>Check</th>
+                      <th>Check Out Time</th>
                     </tr>
                   </thead>
                   <tbody>
-
+     @foreach ($members as $user)
+   <?php // var_dump($user->user->name); ?>
+                      <tr>
+                        <td>{{$user->parent_name}}</td>
+                        <td>{{$user->child_name}}</td>
+                        <td>{{$user->created_at}}</td>
+                     </tr>
+                      @endforeach
 
                   </tbody>
                   <tfoot>
                     <tr>
                      <th>Parent Name</th>
                       <th>Child Name</th>
-                      <th>Token</th>
-                      <th>Check</th>
+                    <th>Check Out Time</th>
                     </tr>
                   </tfoot>
                 </table>

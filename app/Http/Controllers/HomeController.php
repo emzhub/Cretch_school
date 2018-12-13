@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Hash;
 use App\User;
+use App\historys;
 use App\user_profiles;
 use App\user_childs;
 use DB;
@@ -31,19 +32,28 @@ class HomeController extends Controller
      */
     public function index()
     {
-         $child = user_childs::where('status', '0')->get();
+
+           $child = user_childs::where('status', '0')->get();
+        // $parent=user_childs::getNumberOfMembers();
       $send=user_childs::getNumberOfcheckoutchild();
         $se=user_childs::getNumberOfcheckchild();
         $sef=user_childs::getNumberOfparent();
         $ser=user_childs::getNumberOfchilds();
+
+           // dd($child->first()->parent_id);,'parent',$parent
        return view('home',compact('child',$child,'send',$send,'se',$se,'sef',$sef,'ser',$ser));
      //    return view('home');
     }
 
   public function home()
     {
-         $child = user_childs::where('status', '0')->get();
-       return view('welcome',compact('child',$child));
+           $child = user_childs::where('status', '0')->get();
+ //   $parent=user_childs::getNumberOfMembers($child->parent_id);,'parent',$parent
+       $send=user_childs::getNumberOfcheckoutchild();
+        $se=user_childs::getNumberOfcheckchild();
+        $sef=user_childs::getNumberOfparent();
+        $ser=user_childs::getNumberOfchilds();
+       return view('welcome',compact('child',$child,'send',$send,'se',$se,'sef',$sef,'ser',$ser));
    // return view('welcome');
 }
 public function show_parent()
@@ -57,7 +67,8 @@ public function show_parent()
     }
     public function show_history()
     {
-         return view('ControlRoom.history'); 
+         $members = historys::all();
+         return view('ControlRoom.history',compact('members',$members));
     }
 public function show_mail()
 {

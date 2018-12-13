@@ -21,7 +21,11 @@ $us= 1;
     }
 
 
-
+public static function getNumberOfMembers($branch_id){
+ // return DB::table('users')->where('user_id', $branch_id)->first();
+$sd= User::where('user_id', $branch_id)->first();
+        return $sd->name;
+    }
 
     public static function getNumberOfcheckoutchild(){
 $us= 0;
@@ -49,10 +53,8 @@ $us= 0;
       ->where('reg_id', $id)
       ->update($data);
   }
-    public function getNumberOfMembers($branch_id){
-$sd= User::where('user_id', $branch_id)->first();
-        return $sd->name;
-    }
+    
+
    public function user()
     {
         return $this->belongsTo('App\User','user_id');

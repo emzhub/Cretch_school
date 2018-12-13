@@ -6,6 +6,7 @@ use App\Mail\MailMember;
 use App\Mail\MailMtoken;
 use Illuminate\Support\Facades\Mail;
 use App\user_childs;
+use App\historys;
 use App\User;
 use App\user_profiles;
 use Illuminate\Support\Facades\Auth;
@@ -161,14 +162,30 @@ public function generatePICKUP(Request $request){
         //
       $number = 1;
        $id = $request->id;
+      // dd($id);
        $data = array('status'=>$number,'pickup_token'=>000000);
  
-           // Update
+      
+     
+$idg=mt_rand(13, rand(100, 99999990)); // better than rand()
+    $barcodeNumberExists = historys::where('history_id', $idg)->exists();
+          if ($barcodeNumberExists > 0) {
+        return destroy();
+    }else{
+        $ch=DB::table('user_childs')->where('reg_id', $id)->first();
+  // dd($ch);
+        $pid=$ch->parent_id;
+      $sd= User::where('user_id',$pid)->first();
+        historys::create(array(
+                    'history_id' => $id,
+                    'parent_name' => $sd->name,
+                      'child_name' => $ch->full_name
+                            ));
+           }
+        // Update
          //  user_childs::updateData($id, $data);
-        DB::table('user_childs')->where('reg_id', $id)->update($data);
-       // $user = user_childs::where('reg_id', $id)->get();
-       //   $user->status = $number;
-       // $user->save();
+       DB::table('user_childs')->where('reg_id', $id)->update($data);
+           
         //DB::delete('delete * from')
 
         //return \Gate::denies('view-branches', $this->user) ? redirect()->route('dashboard') :

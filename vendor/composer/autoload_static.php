@@ -434,6 +434,7 @@ class ComposerStaticInit2eba8c7e70b9d1e995bb7985f99198ba
         'App\\Providers\\PaginationServiceProvider' => __DIR__ . '/../..' . '/app/Providers/PaginationServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'App\\historys' => __DIR__ . '/../..' . '/app/historys.php',
         'App\\parent' => __DIR__ . '/../..' . '/app/parent.php',
         'App\\profile' => __DIR__ . '/../..' . '/app/profile.php',
         'App\\user_childs' => __DIR__ . '/../..' . '/app/user_childs.php',

@@ -38,6 +38,7 @@ return array(
     'App\\Providers\\PaginationServiceProvider' => $baseDir . '/app/Providers/PaginationServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\User' => $baseDir . '/app/User.php',
+    'App\\historys' => $baseDir . '/app/historys.php',
     'App\\parent' => $baseDir . '/app/parent.php',
     'App\\profile' => $baseDir . '/app/profile.php',
     'App\\user_childs' => $baseDir . '/app/user_childs.php',
