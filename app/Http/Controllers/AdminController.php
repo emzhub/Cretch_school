@@ -38,7 +38,7 @@ class AdminController extends Controller
      return view('ControlRoom.Add_Team');
  }
     public function sendEmail(Request $request){
-    
+
 try {
 
     foreach ($request->to as $to){
@@ -60,7 +60,7 @@ return redirect()
                 ->with('errors',$ex->getMessage());
 }
 
-        
+
     }
 
        public function gettoken(Request $request)
@@ -69,7 +69,7 @@ return redirect()
       $number = 1;
        $id = $request->id;
      //  $data = array('status'=>$number,'pickup_token'=>000000);
- 
+
        foreach (user_childs::where('reg_id',$id)->get() as $user) {
  $number =  mt_rand(13, rand(100, 99999990)); // better than rand()
 
@@ -102,7 +102,7 @@ Mail::send( 'mails.member_token', $data, function($message) use ($data)
     function generatetokeNumber() {
      // foreach(user_childs::all() as $user) {
       foreach (user_childs::where('pickup_token', '0')->get() as $user) {
-    // $to=$user->parent_id; 
+    // $to=$user->parent_id;
 
    // foreach (user_profiles::where('user_id',$to)->get() as $members){
 
@@ -120,11 +120,11 @@ Mail::send( 'mails.member_token', $data, function($message) use ($data)
     // Mail::to($to)
     //           ->send(new MailMtoken($number));
 
-$data = array( 'email' => $user->email, 'first_name' => $user->full_name, 'from' => 'noreply@cretch-school.com', 'from_name' => 'Cretch-School','mee' => $number);
+$data = array( 'email' => $user->email, 'class' => $user->class, 'fname' => $user->full_name, 'from' => 'noreply@cretch-school.com', 'from_name' => 'Cretch-School','mee' => $number);
 
 Mail::send( 'mails.member_token', $data, function($message) use ($data)
 {
-    $message->to( $data['email'] )->from( $data['from'], $data['first_name'] )->subject( 'Welcome!' );
+    $message->to( $data['email'] )->from( $data['from'], $data['fname'] )->subject( 'Welcome!' );
 
 });
 
@@ -164,9 +164,9 @@ public function generatePICKUP(Request $request){
        $id = $request->id;
       // dd($id);
        $data = array('status'=>$number,'pickup_token'=>000000);
- 
-      
-     
+
+
+
 $idg=mt_rand(13, rand(100, 99999990)); // better than rand()
     $barcodeNumberExists = historys::where('history_id', $idg)->exists();
           if ($barcodeNumberExists > 0) {
@@ -185,7 +185,7 @@ $idg=mt_rand(13, rand(100, 99999990)); // better than rand()
         // Update
          //  user_childs::updateData($id, $data);
        DB::table('user_childs')->where('reg_id', $id)->update($data);
-           
+
         //DB::delete('delete * from')
 
         //return \Gate::denies('view-branches', $this->user) ? redirect()->route('dashboard') :
@@ -220,14 +220,14 @@ public function save_add_team(Request $request)
 public function save_add_game(Request $request)
 {
        $this->validate($request, [
-            'fullname' => 'required|string|max:255', 
+            'fullname' => 'required|string|max:255',
             'Parent_id' => 'required|numeric|min:0',
             'dob' => 'required|string|max:255',
            'class' => 'required|string|max:255',
                'gender' => 'required|string|max:40',
 
         ]);
-      $useremail= DB::table('user_profiles')->where('user_id',$request->get('Parent_id'))->first(); 
+      $useremail= DB::table('user_profiles')->where('user_id',$request->get('Parent_id'))->first();
         $fullname=$request->get('fullname');
         $dob=$request->get('dob');
         $class=$request->get('class');
@@ -239,7 +239,7 @@ public function save_add_game(Request $request)
          $user_id = mt_rand(13, rand(100, 99999990));
                                            $exist =DB::table('user_childs')->where('reg_id',$user_id)->first();
                                              if(!$exist){
-                                             
+
                                           user_childs::create(array(
                                                 'reg_id' => $user_id,
                                                 'parent_id' => $Parent_id,
@@ -268,7 +268,7 @@ public function save_add_console(Request $request)
 
 
         $this->validate($request, [
-            'fullname' => 'required|string|max:255', 
+            'fullname' => 'required|string|max:255',
             // 'username' => 'required|string|max:40',
             'email' => 'required|string|email|max:255|unique:users',
             // 'password' => 'required|string|min:6|confirmed',
@@ -327,19 +327,19 @@ Mail::send( 'mails.member_welcome_message', $data, function($message) use ($data
    //            {
    //                   foreach ($request->phone as $phone)
    //                {
-                        
+
    //                       foreach ($request->Occupation as $Occupation)
    //                    {
    //                         foreach ($request->email as $email)
    //                    {
    //                         foreach ($request->gender as $gender)
    //                    {
-                              
+
    //                  }
    //                  //else{
 
    //                 // }
-              
+
    //             }
    //               }
    //        }

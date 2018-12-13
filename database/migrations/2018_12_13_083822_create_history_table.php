@@ -13,9 +13,9 @@ class CreateHistoryTable extends Migration
      */
     public function up()
     {
-        Schema::create('history', function (Blueprint $table) {
+        Schema::create('historys', function (Blueprint $table) {
             $table->increments('id');
-         $table->bigInteger('history_id')->unique();
+         $table->bigInteger('history_id');
             $table->string('parent_name');
             $table->string('child_name');
             $table->timestamps();
