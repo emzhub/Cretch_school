@@ -13,9 +13,17 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use GuzzleHttp\Exception\GuzzleException;
+use GuzzleHttp\Client;
 
 class AdminController extends Controller
 {
+
+  private $SMS_SENDER = 'Cretch_School';
+   private $RESPONSE_TYPE = 'json';
+   private $SMS_USERNAME = 'kenneyg50@gmail.com';
+   private $SMS_PASSWORD = 'Rooneywwe@11';
+
   public function __construct()
  {
      $this->middleware('auth');
@@ -65,6 +73,8 @@ return redirect()
 
        public function gettoken(Request $request)
     {
+      $isError = 0;
+      $errorMessage = true;
         //
       $number = 1;
        $id = $request->id;
@@ -79,7 +89,58 @@ return redirect()
     if ($barcodeNumberExists > 0) {
         return gettoken();
     }else{
+          $sd= User::where('user_id',$user->parent_id)->first();
+      $phone_number = $sd->phone;
 
+             $message = "hello '.$sd->name.' your pick up token for '.$user->full_name.' is '.$number.' ";
+
+    //          $client = new Client();
+    //
+    // $response = $client->post('http://portal.bulksmsnigeria.net/api/?', [
+    //     'verify'    =>  false,
+    //     'form_params' => [
+    //         'username' => $this->SMS_USERNAME,
+    //         'password' => $this->SMS_PASSWORD,
+    //         'message' => $message,
+    //         'sender' => $this->SMS_SENDER,
+    //         'mobiles' => $phone_number,
+    //     ],
+    // ]);
+
+      //Preparing post parameters
+          $postData = array(
+              'username' => $this->SMS_USERNAME,
+              'password' => $this->SMS_PASSWORD,
+              'message' => $message,
+              'sender' =>  $this->SMS_SENDER,
+              'mobiles' => $phone_number,
+              'response' => $this->RESPONSE_TYPE
+          );
+          $url = "http://portal.bulksmsnigeria.net/api/";
+
+                 $ch = curl_init();
+                 curl_setopt_array($ch, array(
+                     CURLOPT_URL => $url,
+                     CURLOPT_RETURNTRANSFER => true,
+                     CURLOPT_POST => true,
+                     CURLOPT_POSTFIELDS => $postData
+                 ));
+
+
+                 //Ignore SSL certificate verification
+                 curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+                 curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+                 //Print error if any
+       if (curl_errno($ch)) {
+           $isError = true;
+           $errorMessage = curl_error($ch);
+       }
+       curl_close($ch);
+
+
+
+//send token via email
 $data = array( 'email' => $user->email, 'class' => $user->class, 'fname' => $user->full_name, 'first_name' => config('app.name'), 'from' => 'noreply@cretch-school.com', 'from_name' => 'Cretch-School','mee' => $number);
 
 Mail::send( 'mails.member_token', $data, function($message) use ($data)
@@ -93,14 +154,20 @@ Mail::send( 'mails.member_token', $data, function($message) use ($data)
     $user->save();
 }
        }
-// return redirect()->back()->with('status', "Token Generated For All .....");
-        //return view('branch.all');
-         return response()->json(['success' => true,]);
+
+        if($isError){
+           return array('error' => 1 , 'message' => $errorMessage);
+       }else{
+        return response()->json(['success' => true,]);
+        //  //  return array('error' => 0 );
+      }
+
     }
 
 
     function generatetokeNumber() {
-     // foreach(user_childs::all() as $user) {
+      $isError = 0;
+      $errorMessage = true;
       foreach (user_childs::where('pickup_token', '0')->get() as $user) {
     // $to=$user->parent_id;
 
@@ -117,8 +184,55 @@ Mail::send( 'mails.member_token', $data, function($message) use ($data)
     if ($barcodeNumberExists > 0) {
         return generatetokeNumber();
     }else{
-    // Mail::to($to)
-    //           ->send(new MailMtoken($number));
+      $sd= User::where('user_id',$user->parent_id)->first();
+  $phone_number = $sd->phone;
+
+         $message = "hello '.$sd->name.' your pick up token for '.$user->full_name.' is '.$number.' ";
+
+         $client = new Client();
+
+    // $response = $client->post('http://portal.bulksmsnigeria.net/api/?', [
+    //     'verify'    =>  false,
+    //     'form_params' => [
+    //         'username' => $this->SMS_USERNAME,
+    //         'password' => $this->SMS_PASSWORD,
+    //         'message' => $message,
+    //         'sender' => $this->SMS_SENDER,
+    //         'mobiles' => $phone_number,
+    //     ],
+    // ]);
+
+  //Preparing post parameters
+      $postData = array(
+          'username' => $this->SMS_USERNAME,
+          'password' => $this->SMS_PASSWORD,
+          'message' => $message,
+          'sender' =>  $this->SMS_SENDER,
+          'mobiles' => $phone_number,
+          'response' => $this->RESPONSE_TYPE
+      );
+      $url = "http://portal.bulksmsnigeria.net/api/";
+
+             $ch = curl_init();
+             curl_setopt_array($ch, array(
+                 CURLOPT_URL => $url,
+                 CURLOPT_RETURNTRANSFER => true,
+                 CURLOPT_POST => true,
+                 CURLOPT_POSTFIELDS => $postData
+             ));
+
+
+             //Ignore SSL certificate verification
+             curl_setopt($ch, CURLOPT_SSL_VERIFYHOST, 0);
+             curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, 0);
+
+            // Print error if any
+   if (curl_errno($ch)) {
+       $isError = true;
+       $errorMessage = curl_error($ch);
+   }
+   curl_close($ch);
+
 
 $data = array( 'email' => $user->email, 'class' => $user->class, 'fname' => $user->full_name, 'from' => 'noreply@cretch-school.com', 'from_name' => 'Cretch-School','mee' => $number);
 
@@ -135,7 +249,14 @@ Mail::send( 'mails.member_token', $data, function($message) use ($data)
 }
 //}
     // otherwise, it's valid and can be used
- return redirect()->back()->with('status', "Token Generated For All .....");
+    if($isError){
+       return redirect()->back()->with('errors', $errorMessage);
+      // return array('error' => 1 , 'message' => $errorMessage);
+   }else{
+   return redirect()->back()->with('status', "Token Generated For All .....");
+    //  //  return array('error' => 0 );
+  }
+
 }
 
 // function barcodeNumberExists($number) {
